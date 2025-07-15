@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import NavBar from './Navbar.tsx';
+import NavBar from './Components/Navbar.tsx';
 import { motion, AnimatePresence, animate } from 'framer-motion';
 import { CustomButton as Button } from './Components/CustomButton.tsx';
-import { CustomCard } from './CustomCard.tsx';
+import { CustomCard } from './Components/CustomCard.tsx';
 
 // Fade in animation variants
 const fadeIn = {

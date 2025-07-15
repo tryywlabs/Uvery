@@ -5,7 +5,7 @@ import {
   NavbarLink,
   NavbarToggle,
 } from 'flowbite-react';
-import { CustomButton } from './Components/CustomButton.tsx';
+import { CustomButton } from './CustomButton.tsx';
 
 export default function NavBar() {
   return (
