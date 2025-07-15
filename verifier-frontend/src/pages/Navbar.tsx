@@ -5,10 +5,11 @@ import {
   NavbarLink,
   NavbarToggle,
 } from 'flowbite-react';
+import { CustomButton } from './Components/CustomButton.tsx';
 
 export default function NavBar() {
   return (
-    <Navbar fluid className='!bg-zinc-100 !text-white'>
+    <Navbar fluid className='!bg-zinc-100 py-2'>
       <NavbarBrand>
         <img
           src='src/assets/Uvery.svg'
@@ -18,20 +19,33 @@ export default function NavBar() {
         />
       </NavbarBrand>
       <NavbarToggle />
-      <NavbarCollapse className='flex items-center space-x-6'>
-        <NavbarLink className='text-black' href='#' active>
+      <NavbarCollapse className='flex items-center justify-center space-x-8 font-sans'>
+        <NavbarLink
+          className='flex items-center text-lg !font-semibold !text-gray-700 hover:text-blue-600 transition'
+          href='#'
+          active
+        >
           Home
         </NavbarLink>
-        <NavbarLink className='text-grey-600' href='#'>
+        <NavbarLink
+          className='flex items-center text-lg !font-semibold !text-gray-700 hover:text-blue-600 transition'
+          href='#about'
+        >
           About
         </NavbarLink>
-        <NavbarLink href='#'>FAQs</NavbarLink>
-        <NavbarLink href='#'>Contact Us</NavbarLink>
-        <button className='hover:brightness-150 transition'>
-          <NavbarLink className='!text-white' href='#'>
-            Sign in for Institutions
-          </NavbarLink>
-        </button>
+        <NavbarLink
+          className='flex items-center text-lg !font-semibold !text-gray-700 hover:text-blue-600 transition'
+          href='#faqs'
+        >
+          FAQs
+        </NavbarLink>
+        <NavbarLink
+          className='flex items-center text-lg !font-semibold !text-gray-700 hover:text-blue-600 transition'
+          href='#contact'
+        >
+          Contact Us
+        </NavbarLink>
+        <CustomButton>Sign in for Institutions</CustomButton>
       </NavbarCollapse>
     </Navbar>
   );

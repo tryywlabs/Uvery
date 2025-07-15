@@ -10,6 +10,13 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/*TAILWIND FROM NOW ON FOR THE APP*/
+/*TAILWIND FROM NOW ON FOR THE APP*/
+
 /* .logo {
   height: 6em;
   padding: 1.5em;
