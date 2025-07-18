@@ -5,6 +5,7 @@ import { CustomButton as Button } from './Components/CustomButton.tsx';
 import { CustomCard } from './Components/CustomCard.tsx';
 
 // Fade in animation variants
+// This animation will fade in elements with a slight upward motion
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
   visible: (i = 1) => ({
@@ -19,6 +20,8 @@ const fadeIn = {
   }),
 };
 
+//Logo animation variants
+// This animation will make the logo blink twice before disappearing
 const logoVariants = {
   initial: { opacity: 1, scale: 1.5 },
   animate: {
@@ -35,7 +38,7 @@ const logoVariants = {
 
 //Landing page component
 // This component serves as the landing page for the application, showcasing the main features and purpose of Uvery
-const LandingPage = () => {
+export const LandingPage = () => {
   //Show logo upon initial load for 1.5 seconds
   const [showLogo, setShowLogo] = useState(true);
 

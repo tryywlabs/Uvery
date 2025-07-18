@@ -8,6 +8,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 244, 245, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 
 html {

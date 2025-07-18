@@ -6,6 +6,8 @@ import {
   NavbarToggle,
 } from 'flowbite-react';
 import { CustomButton } from './CustomButton.tsx';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
   return (
@@ -22,7 +24,7 @@ export default function NavBar() {
       <NavbarCollapse className='flex items-center justify-center space-x-8 font-sans'>
         <NavbarLink
           className='flex items-center text-lg !font-semibold !text-gray-700 hover:text-blue-600 transition'
-          href='#'
+          href='/'
           active
         >
           Home
@@ -45,7 +47,9 @@ export default function NavBar() {
         >
           Contact Us
         </NavbarLink>
-        <CustomButton>Sign in for Institutions</CustomButton>
+        <Link to='/signin'>
+          <CustomButton>Sign in for Institutions</CustomButton>
+        </Link>
       </NavbarCollapse>
     </Navbar>
   );
