@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 
+// Define schema for user accounts
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -11,6 +12,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  institutionType: {
+    type: String,
+    enum: ['University', 'College', 'Training Institute', 'Certification Body'],
+    required: true,
+  },
+  token: {
+    type: String,
+    defult: null,
   },
 });
 

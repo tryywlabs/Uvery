@@ -3,6 +3,7 @@ import NavBar from './Components/Navbar.tsx';
 import { motion, AnimatePresence, animate } from 'framer-motion';
 import { CustomButton as Button } from './Components/CustomButton.tsx';
 import { CustomCard } from './Components/CustomCard.tsx';
+import { useNavigate } from 'react-router-dom';
 
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
@@ -41,6 +42,8 @@ const logoVariants = {
 export const LandingPage = () => {
   //Show logo upon initial load for 1.5 seconds
   const [showLogo, setShowLogo] = useState(true);
+
+  const navigate = useNavigate();
 
   // Show logo for 1.5 seconds
   useEffect(() => {
@@ -128,6 +131,7 @@ export const LandingPage = () => {
                     <Button
                       variant='outline'
                       className='mx-auto bg-white text-white px-8 py-3 rounded-lg font-semibold shadow hover:opacity-0.1 transition'
+                      onClick={() => navigate('/verifier')}
                     >
                       Verify Now
                     </Button>
@@ -148,6 +152,7 @@ export const LandingPage = () => {
                     <Button
                       variant='outline'
                       className='mx-auto bg-white text-white px-8 py-3 rounded-lg font-semibold shadow hover:opacity-0.1 transition'
+                      onClick={() => navigate('/signup')}
                     >
                       Sign Up as an Institution
                     </Button>

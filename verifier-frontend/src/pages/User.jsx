@@ -1,9 +1,11 @@
 import NavBar from './Components/Navbar.tsx';
 import { motion, AnimatePresence, animate } from 'framer-motion';
+import { useAuth } from './Components/AuthProvider.jsx';
 import { CustomButton as Button } from './Components/CustomButton.tsx';
 import { CustomCard } from './Components/CustomCard.tsx';
 import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
@@ -22,6 +24,23 @@ const fadeIn = {
 };
 
 export const User = () => {
+  const { user, isAuthenticated, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/signin');
+    }
+  }, [isAuthenticated, loading, navigate]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated || !user) {
+    return null;
+  }
+
   return (
     <div id='userMain' className='bg-zinc-100 min-h-screen'>
       <NavBar></NavBar>
@@ -32,7 +51,7 @@ export const User = () => {
         variants={fadeIn}
         custom={1}
       >
-        Welcome, UserName
+        Welcome, {user.username || user.institutionName}!
       </motion.h1>
 
       <motion.h2
@@ -44,6 +63,19 @@ export const User = () => {
       >
         Upload your certificate, send to student!
       </motion.h2>
+      <motion.div
+        className='px-15 py-5'
+        initial='hidden'
+        animate='visible'
+        variants={fadeIn}
+        custom={3}
+      >
+        <p className='text-gray-600'>
+          Institution: {user.institutionName || user.username}
+        </p>
+        <p className='text-gray-600'>Email: {user.email}</p>
+        <p className='text-gray-600'>Type: {user.institutionType}</p>
+      </motion.div>
     </div>
   );
 };

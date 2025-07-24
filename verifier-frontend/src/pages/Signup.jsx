@@ -1,7 +1,5 @@
 import NavBar from './Components/Navbar.tsx';
-import { motion, AnimatePresence, animate } from 'framer-motion';
-import { CustomButton as Button } from './Components/CustomButton.tsx';
-import { CustomCard } from './Components/CustomCard.tsx';
+import { motion } from 'framer-motion';
 import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +19,90 @@ const fadeIn = {
   }),
 };
 
+const signupFields = [
+  {
+    id: 'username',
+    label: 'Institution Name',
+    type: 'text',
+    placeholder: 'University of Example',
+    required: true,
+  },
+  {
+    id: 'email',
+    label: 'Institute Email Address',
+    type: 'email',
+    placeholder: 'your-institution-email@university.edu',
+    required: true,
+  },
+  {
+    id: 'password',
+    label: 'Create Password',
+    type: 'password',
+    placeholder: 'Create a secure password',
+    required: true,
+  },
+  {
+    id: 'confirmPassword',
+    label: 'Confirm password',
+    type: 'password',
+    placeholder: 'Confirm your password',
+    required: true,
+  },
+  {
+    id: 'institutionType',
+    label: 'Institution Type',
+    type: 'select',
+    placeholder: 'Select institution type',
+    options: [
+      'University',
+      'College',
+      'Training Institute',
+      'Certification Body',
+    ],
+    required: true,
+  },
+];
+
 export const Signup = () => {
+  const navigate = useNavigate();
+  const handleSignupSubmit = async (formData) => {
+    console.log('Signup Data:', formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match. Please try again.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password, // Use password field for password
+          institutionType: formData.institutionType,
+        }),
+      });
+
+      const data = await response.json();
+      console.log('Signup Response:', data);
+
+      if (response.ok) {
+        alert('Signup successful! Please sign in to continue.');
+        // Navigate to signin page after successful signup
+        navigate('/signin');
+      } else {
+        alert(data.errorMessage || 'Signup failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Signup failed:', error);
+      alert('Network error. Please check your connection and try again.');
+    }
+  };
+
   return (
     <div id='signupMain' className='bg-zinc-100 min-h-screen'>
       <NavBar></NavBar>
@@ -57,7 +138,15 @@ export const Signup = () => {
           custom={3}
           className='flex w-full max-w-4xl'
         >
-          <CustomForm></CustomForm>
+          <CustomForm
+            fields={signupFields}
+            submitButtonText='Sign Up'
+            onSubmit={handleSignupSubmit}
+            linkButton={{
+              text: 'Already have an account? Sign In',
+              href: '/signin',
+            }}
+          />
         </motion.div>
       </div>
     </div>

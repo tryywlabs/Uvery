@@ -7,14 +7,21 @@ import {
   getUserById,
   updateUser,
   deleteUser,
+  signinUser,
+  signoutUser,
 } from '../controller/userController.js';
 
 const route = express.Router();
 
-route.post('/user', createUser);
-route.get('/users', getAllUsers);
-route.get('/user/:id', getUserById);
-route.put('/update/user/:id', updateUser);
-route.delete('/delete/user/:id', deleteUser);
+//Public Routes
+route.post('/', createUser);
+route.post('/signin', signinUser);
+
+//Protected Routes (Requires Authentication)
+route.get('/', getAllUsers);
+route.get('/:id', getUserById);
+route.put('/:id', updateUser);
+route.delete('/:id', deleteUser);
+route.post('/signout', signoutUser);
 
 export default route;
