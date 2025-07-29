@@ -40,15 +40,15 @@ const signinFields = [
 
 export const Signin = () => {
   const navigate = useNavigate();
-  const { login, isAuthenticated, loading } = useAuth();
+  const { login, isAuthenticated, loading, user } = useAuth();
 
   // Move useEffect OUTSIDE of handleSigninSubmit
   useEffect(() => {
     if (!loading && isAuthenticated) {
       console.log('User already authenticated, redirecting to user page');
-      navigate('/userplaceholder');
+      navigate(`/${user.username || user.institutionName}`);
     }
-  }, [isAuthenticated, loading, navigate]);
+  }, [isAuthenticated, loading, navigate, user]);
 
   // Show loading while checking authentication
   if (loading) {
@@ -82,7 +82,8 @@ export const Signin = () => {
       if (response.ok) {
         login(data.user, data.token);
         console.log('Signin successful:', data);
-        navigate('/userplaceholder');
+        const user = data.user;
+        navigate(`/${user.username || user.institutionName}`);
       } else {
         alert(data.errorMessage || 'Sign in failed. Please try again.');
       }

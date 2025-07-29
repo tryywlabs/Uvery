@@ -17,7 +17,7 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/userplaceholder' element={<User />} />
+          <Route path='/:username' element={<User />} />
         </Routes>
       </Router>
     </AuthProvider>

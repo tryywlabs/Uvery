@@ -1,11 +1,9 @@
 import NavBar from './Components/Navbar.tsx';
 import { motion, AnimatePresence, animate } from 'framer-motion';
 import { useAuth } from './Components/AuthProvider.jsx';
-import { CustomButton as Button } from './Components/CustomButton.tsx';
-import { CustomCard } from './Components/CustomCard.tsx';
-import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
@@ -24,6 +22,7 @@ const fadeIn = {
 };
 
 export const User = () => {
+  const { username } = useParams();
   const { user, isAuthenticated, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -39,6 +38,14 @@ export const User = () => {
 
   if (!isAuthenticated || !user) {
     return null;
+  }
+
+  if (!loading && isAuthenticated && user) {
+    const userIdentifier = user.username || user.institutionName;
+    if (username !== userIdentifier) {
+      navigate(`/${userIdentifier}`);
+      return null;
+    }
   }
 
   return (
