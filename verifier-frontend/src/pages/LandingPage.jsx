@@ -131,7 +131,7 @@ export const LandingPage = () => {
                     <Button
                       variant='outline'
                       className='mx-auto bg-white text-white px-8 py-3 rounded-lg font-semibold shadow hover:opacity-0.1 transition'
-                      onClick={() => navigate('/verifier')}
+                      onClick={() => navigate('/verify')}
                     >
                       Verify Now
                     </Button>

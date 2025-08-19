@@ -1,4 +1,4 @@
-//Manage structure of data & DB interactions
+//Manage structure of data & DB interactions for User Accounts
 
 import mongoose from 'mongoose';
 
