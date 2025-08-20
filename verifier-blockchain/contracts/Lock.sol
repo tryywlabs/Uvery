@@ -1,14 +1,21 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 import "hardhat/console.sol";
 
-//VERIFIER-BLOCKCHAIN
-//VERIFIER-BLOCKCHAIN
+/*
+ * FILE: Solidity Smart Contract
+ * DESCRIPTION: Smart contract running on the Ethereum Testnet Server
+ * USE: Deploy via Hardhat on the Sepolia Testnet: npx hardhat run scripts/deploy.js --network sepolia
+ */
 contract CertificateVerifier{
-    //Certificate Object
+    //Certificate Object Attributes
     //1. FileHash (Generated in the backend)
     //2. Institution (Issuing Body)
     //3. student email (Input manually when uploading certificate)
+    //4. Certificate Type (Bachelor's / PGT / PGR / PHD / Other)
+    //5. Timestamp (Automatically generated)
+    //6. isValid (true / false value depending on verification)
+
     struct Certificate {
         string fileHash;        
         address institution;    
@@ -20,20 +27,23 @@ contract CertificateVerifier{
     
     // Mapping from certificate ID to certificate data
     mapping(uint256 => Certificate) public certificates;
-    
     // Mapping from file hash to certificate ID for quick lookup, allowing certificate verification by hash
     mapping(string => uint256) public hashToCertificateId;
-    
     // Mapping to track authorized institutions
     mapping(address => bool) public authorizedInstitutions;
-    
     // Counter for certificate IDs for later read functions
     uint256 public certificateCounter;
-    
     // Contract owner (can authorize institutions)
     address public owner;
     
-    // Events
+    /*
+     * Events:
+     * 1. CertificateAdded
+     * 2. CertificateRevoked
+     * 3. InstitutionAuthorized
+     * 4. InstitutionRevoked
+     */
+
     event CertificateAdded(
         uint256 indexed certificateId,
         string fileHash,
@@ -41,25 +51,28 @@ contract CertificateVerifier{
         string studentEmail,
         string certificateType
     );
-    
     event CertificateRevoked(uint256 indexed certificateId);
     event InstitutionAuthorized(address indexed institution);
     event InstitutionRevoked(address indexed institution);
     
-    // Modifiers
+    
+    /*
+     * Modifiers:
+     * 1. onlyOwner: Used where only contract owner can perform an action
+     * 2. onlyAuthorizedInstitution: Institutions must be authorized to perform certificate uploads
+     * 3. certificateExists: Used for reads by verifiers
+     */
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can perform this action");
         _;
     }
-    
     modifier onlyAuthorizedInstitution() {
         require(
-            authorizedInstitutions[msg.sender], 
+            authorizedInstitutions[msg.sender],
             "Only authorized institutions can add certificates"
         );
         _;
     }
-    
     modifier certificateExists(uint256 _certificateId) {
         require(
             _certificateId > 0 && _certificateId <= certificateCounter,
@@ -68,6 +81,11 @@ contract CertificateVerifier{
         _;
     }
     
+    /*
+     * Constructor:
+     * 1. set owner as the sender of the transaction request
+     * 2. initialise certificateCounter to 0 for tracking all added certificates
+     */
     constructor() {
         owner = msg.sender;
         certificateCounter = 0;
@@ -231,35 +249,3 @@ contract CertificateVerifier{
         return authorizedInstitutions[_institution];
     }
 }
-
-//END VERIFIER-BLOCKCHAIN
-//END VERIFIER-BLOCKCHAIN
-
-// contract Lock {
-//     uint public unlockTime;
-//     address payable public owner;
-
-//     event Withdrawal(uint amount, uint when);
-
-//     constructor(uint _unlockTime) payable {
-//         require(
-//             block.timestamp < _unlockTime,
-//             "Unlock time should be in the future"
-//         );
-
-//         unlockTime = _unlockTime;
-//         owner = payable(msg.sender);
-//     }
-
-//     function withdraw() public {
-//         // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-//         // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
-
-//         require(block.timestamp >= unlockTime, "You can't withdraw yet");
-//         require(msg.sender == owner, "You aren't the owner");
-
-//         emit Withdrawal(address(this).balance, block.timestamp);
-
-//         owner.transfer(address(this).balance);
-//     }
-// }

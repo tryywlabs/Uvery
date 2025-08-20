@@ -1,126 +1,58 @@
-const {
-  time,
-  loadFixture,
-} = require("@nomicfoundation/hardhat-toolbox/network-helpers");
-const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
-const { expect } = require("chai");
+import pkg from 'hardhat';
+import { expect } from 'chai';
+const { ethers } = pkg;
 
-describe("Lock", function () {
-  // We define a fixture to reuse the same setup in every test.
-  // We use loadFixture to run this setup once, snapshot that state,
-  // and reset Hardhat Network to that snapshot in every test.
-  async function deployOneYearLockFixture() {
-    const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-    const ONE_GWEI = 1_000_000_000;
+/**
+ * FILE: Smart Contract Test Cases
+ *
+ */
 
-    const lockedAmount = ONE_GWEI;
-    const unlockTime = (await time.latest()) + ONE_YEAR_IN_SECS;
-
-    // Contracts are deployed using the first signer/account by default
-    const [owner, otherAccount] = await ethers.getSigners();
-
-    const Lock = await ethers.getContractFactory("Lock");
-    const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-    return { lock, unlockTime, lockedAmount, owner, otherAccount };
-  }
-
-  describe("Deployment", function () {
-    it("Should set the right unlockTime", async function () {
-      const { lock, unlockTime } = await loadFixture(deployOneYearLockFixture);
-
-      expect(await lock.unlockTime()).to.equal(unlockTime);
-    });
-
-    it("Should set the right owner", async function () {
-      const { lock, owner } = await loadFixture(deployOneYearLockFixture);
-
-      expect(await lock.owner()).to.equal(owner.address);
-    });
-
-    it("Should receive and store the funds to lock", async function () {
-      const { lock, lockedAmount } = await loadFixture(
-        deployOneYearLockFixture
-      );
-
-      expect(await ethers.provider.getBalance(lock.target)).to.equal(
-        lockedAmount
-      );
-    });
-
-    it("Should fail if the unlockTime is not in the future", async function () {
-      // We don't use the fixture here because we want a different deployment
-      const latestTime = await time.latest();
-      const Lock = await ethers.getContractFactory("Lock");
-      await expect(Lock.deploy(latestTime, { value: 1 })).to.be.revertedWith(
-        "Unlock time should be in the future"
-      );
-    });
+describe('CertificateVerifier', async function () {
+  let contract, owner, institution1, institution2, outsider;
+  this.beforeEach(async () => {
+    [owner, institution1, institution2, outsider] = await ethers.getSigners();
+    const Factory = await ethers.getContractFactory('CertificateVerifier'); //Gets contract ABI through the getContractFactory method
+    contract = await Factory.deploy();
+    await contract.waitForDeployment();
   });
 
-  describe("Withdrawals", function () {
-    describe("Validations", function () {
-      it("Should revert with the right error if called too soon", async function () {
-        const { lock } = await loadFixture(deployOneYearLockFixture);
+  /**
+   * TEST CASES
+   * 1. Owner can authorize institutions
+   * 2. Authorised Institutions can Add Certificates
+   * 3. Unauthorized Institutions cannot add certificates
+   * 4.
+   */
+  it('Owner can authorise institutions', async () => {
+    await expect(contract.authorizeInstitution(institution1.address)).to.emit(
+      contract,
+      'InstitutionAuthorized'
+    );
 
-        await expect(lock.withdraw()).to.be.revertedWith(
-          "You can't withdraw yet"
-        );
-      });
+    await expect(
+      contract
+        .connect(institution1)
+        .addCertificate('exampleFileHashForTest', 'student@example.edu', 'PGT')
+    ).to.emit(contract, 'CertificateAdded');
+  });
 
-      it("Should revert with the right error if called from another account", async function () {
-        const { lock, unlockTime, otherAccount } = await loadFixture(
-          deployOneYearLockFixture
-        );
+  it('Authorised Institution can add certificates', async () => {
+    await contract.authorizeInstitution(institution1.address);
+    const transcript = await contract
+      .connect(institution1)
+      .addCertificate('exampleFileHashForTest', 'student@example.edu', 'PGT');
+    const receipt = await transcript.wait();
+    const event = receipt.logs.find(
+      (l) => l.fragment?.name === 'CertificateAdded'
+    );
+    expect(event).to.not.be.undefined;
+  });
 
-        // We can increase the time in Hardhat Network
-        await time.increaseTo(unlockTime);
-
-        // We use lock.connect() to send a transaction from another account
-        await expect(lock.connect(otherAccount).withdraw()).to.be.revertedWith(
-          "You aren't the owner"
-        );
-      });
-
-      it("Shouldn't fail if the unlockTime has arrived and the owner calls it", async function () {
-        const { lock, unlockTime } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        // Transactions are sent using the first signer by default
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw()).not.to.be.reverted;
-      });
-    });
-
-    describe("Events", function () {
-      it("Should emit an event on withdrawals", async function () {
-        const { lock, unlockTime, lockedAmount } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw())
-          .to.emit(lock, "Withdrawal")
-          .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
-      });
-    });
-
-    describe("Transfers", function () {
-      it("Should transfer the funds to the owner", async function () {
-        const { lock, unlockTime, lockedAmount, owner } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw()).to.changeEtherBalances(
-          [owner, lock],
-          [lockedAmount, -lockedAmount]
-        );
-      });
-    });
+  it('Unauthorized Institutions cannot add certificates', async () => {
+    await expect(
+      contract
+        .connect(outsider)
+        .addCertificate('exampleFileHashForTest', 'student@example.edu', 'PGT')
+    ).to.be.revertedWith('Only authorized institutions can add certificates');
   });
 });
