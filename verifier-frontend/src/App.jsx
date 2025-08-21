@@ -4,6 +4,7 @@ import { LandingPage } from './pages/landingpage.jsx';
 import { Signin } from './pages/Signin.jsx';
 import { Signup } from './pages/Signup.jsx';
 import { User } from './pages/User.jsx';
+import { Verify } from './pages/Verify.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './pages/Components/AuthProvider.jsx';
 
@@ -17,7 +18,8 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/userplaceholder' element={<User />} />
+          <Route path='/:username' element={<User />} />
+          <Route path='/verify' element={<Verify />} />
         </Routes>
       </Router>
     </AuthProvider>

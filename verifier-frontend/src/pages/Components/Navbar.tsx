@@ -6,7 +6,6 @@ import {
   NavbarToggle,
 } from 'flowbite-react';
 import { CustomButton } from './CustomButton.tsx';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider.jsx';
 
@@ -30,7 +29,7 @@ export default function NavBar() {
 
   const handleHome = () => {
     if (isAuthenticated) {
-      navigate('/userplaceholder');
+      navigate(`/${user.username || user.institutionName}`);
     } else {
       navigate('/');
     }
@@ -53,7 +52,7 @@ export default function NavBar() {
           onClick={handleHome}
           active
         >
-          Home
+          {isAuthenticated ? 'Dashboard' : 'Home'}
         </NavbarLink>
         <NavbarLink
           className='flex items-center text-lg !font-semibold !text-gray-700 hover:text-blue-600 transition'

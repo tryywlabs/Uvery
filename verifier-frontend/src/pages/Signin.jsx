@@ -4,6 +4,7 @@ import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './Components/AuthProvider.jsx';
 import { useEffect } from 'react';
+import { apiCall } from '../utils/connection.js';
 
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
@@ -40,15 +41,15 @@ const signinFields = [
 
 export const Signin = () => {
   const navigate = useNavigate();
-  const { login, isAuthenticated, loading } = useAuth();
+  const { login, isAuthenticated, loading, user } = useAuth();
 
   // Move useEffect OUTSIDE of handleSigninSubmit
   useEffect(() => {
     if (!loading && isAuthenticated) {
       console.log('User already authenticated, redirecting to user page');
-      navigate('/userplaceholder');
+      navigate(`/${user.username || user.institutionName}`);
     }
-  }, [isAuthenticated, loading, navigate]);
+  }, [isAuthenticated, loading, navigate, user]);
 
   // Show loading while checking authentication
   if (loading) {
@@ -65,7 +66,7 @@ export const Signin = () => {
 
     try {
       // FIXED: Use correct endpoint /api/users/signin (not /api/user/signin)
-      const response = await fetch('http://localhost:8000/api/user/signin', {
+      const response = await apiCall('/users/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +83,8 @@ export const Signin = () => {
       if (response.ok) {
         login(data.user, data.token);
         console.log('Signin successful:', data);
-        navigate('/userplaceholder');
+        const user = data.user;
+        navigate(`/${user.username || user.institutionName}`);
       } else {
         alert(data.errorMessage || 'Sign in failed. Please try again.');
       }

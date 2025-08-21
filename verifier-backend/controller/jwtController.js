@@ -1,5 +1,5 @@
 /*
- * NOT IN USE
+ * DEPRECATED as of 21.07.25
  * JWT Handled directly in userController.js
  * This file is kept for reference and future use if needed.
  */

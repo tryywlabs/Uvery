@@ -1,8 +1,19 @@
-//Manage structure of data & DB interactions
-
 import mongoose from 'mongoose';
 
-// Define schema for user accounts
+/**
+ *
+ * FILE: userModel Schema
+ * DESCRIPTION: Mongoose Schema for User Accounts
+ * USE: Define user document structure for MongoDB
+ */
+
+// ELEMENTS:
+// 1. Username
+// 2. Email
+// 3. Password (Hashed)
+// 4. Institution Type
+// 5. JWT Token
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
