@@ -5,17 +5,16 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import route from './routes/userRoute.js';
 import certificateRoute from './routes/certificateRoute.js';
-// Ethers instead of initial Web 3 import to ensure latest compatibility
-import { ethers } from 'ethers';
 
 const app = express();
 dotenv.config();
 
 const corsOptions = {
   origin: [
-    'http://localhost:3000',
     'http://localhost:5173',
     'http://localhost:5174',
+    'http://localhost:8000',
+    'Add-production-domain',
   ],
   credentials: true,
   optionsSuccessStatus: 200, // For legacy browser support
@@ -37,6 +36,18 @@ app.get('/', (res) => {
 //API Routes
 app.use('/api/user', route);
 app.use('/api/certificate', certificateRoute);
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        return callback(new Error('CORS Violation'), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(MONGO_URL)

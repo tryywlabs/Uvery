@@ -2,9 +2,10 @@ import { ethers } from 'ethers';
 import dotenv from 'dotenv';
 dotenv.config();
 
-/*
+/**
  * FILE: BlockchainService Class
- *
+ * DESCRIPTION: Provides methods that map 1:1 with the smart contract functions.
+ * USE: Generate an instance to create a connection to the Ethereum Network.
  */
 
 //Contract ABI methods:

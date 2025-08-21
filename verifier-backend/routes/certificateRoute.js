@@ -6,6 +6,12 @@ import {
   testBlockchainConnection,
 } from '../controller/certController.js';
 
+/**
+ * FILE: Route definitions for certificate-related API calls
+ * DESCRIPTION: Defines Routes for testing, adding, verifying, uploading and registering files
+ * USE: Used as endpoints to invoke BlockchainService methods
+ */
+
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 

@@ -1,7 +1,7 @@
 [
   {
     "name": "Engineering Institute of Technology",
-    "domains": ["student.eit.edu.au"],
+    "domains": ["eit.edu.au"],
     "web_pages": ["https://www.eit.edu.au/"],
     "country": "Australia",
     "alpha_two_code": "AU",
@@ -33,7 +33,7 @@
   },
   {
     "name": "Wroclaw Akademia Biznesu",
-    "domains": ["student.wab.edu.pl", "wab.edu.pl"],
+    "domains": ["wab.edu.pl", "wab.edu.pl"],
     "web_pages": ["https://wab.edu.pl"],
     "country": "Poland",
     "alpha_two_code": "PL",
@@ -65,7 +65,7 @@
   },
   {
     "name": "West Herts College",
-    "domains": ["student.westherts.ac.uk", "westherts.ac.uk"],
+    "domains": ["westherts.ac.uk", "westherts.ac.uk"],
     "web_pages": ["https://westherts.ac.uk"],
     "country": "United Kingdom",
     "alpha_two_code": "GB",
@@ -232,7 +232,11 @@
     "country": "India"
   },
   {
-    "web_pages": ["https://www.cstj.qc.ca", "https://ccmt.cstj.qc.ca", "https://ccml.cstj.qc.ca"],
+    "web_pages": [
+      "https://www.cstj.qc.ca",
+      "https://ccmt.cstj.qc.ca",
+      "https://ccml.cstj.qc.ca"
+    ],
     "name": "Cégep de Saint-Jérôme",
     "alpha_two_code": "CA",
     "state-province": "Quebec",
@@ -2256,7 +2260,10 @@
     "country": "United States"
   },
   {
-    "web_pages": ["http://www.capella.edu/", "http://www.capellauniversity.edu/"],
+    "web_pages": [
+      "http://www.capella.edu/",
+      "http://www.capellauniversity.edu/"
+    ],
     "name": "Capella University",
     "alpha_two_code": "US",
     "state-province": null,
@@ -7217,7 +7224,12 @@
     "name": "State University of New York at Stony Brook",
     "alpha_two_code": "US",
     "state-province": null,
-    "domains": ["stonybrook.edu", "fsl.cs.sunysb.edu", "cs.sunysb.edu", "lmc.cs.sunysb.edu"],
+    "domains": [
+      "stonybrook.edu",
+      "fsl.cs.sunysb.edu",
+      "cs.sunysb.edu",
+      "lmc.cs.sunysb.edu"
+    ],
     "country": "United States"
   },
   {
@@ -13941,7 +13953,10 @@
     "country": "Belgium"
   },
   {
-    "web_pages": ["https://www.kuleuven.be/kuleuven/", "https://www.kuleuven.be/english/kuleuven/"],
+    "web_pages": [
+      "https://www.kuleuven.be/kuleuven/",
+      "https://www.kuleuven.be/english/kuleuven/"
+    ],
     "name": "Katholieke Universiteit Leuven",
     "alpha_two_code": "BE",
     "state-province": null,
@@ -26387,7 +26402,10 @@
     "country": "France"
   },
   {
-    "web_pages": ["http://www.polytechnique.fr/", "https://www.polytechnique.edu/"],
+    "web_pages": [
+      "http://www.polytechnique.fr/",
+      "https://www.polytechnique.edu/"
+    ],
     "name": "École Polytechnique",
     "alpha_two_code": "FR",
     "state-province": null,
@@ -28572,7 +28590,12 @@
     "name": "Hochschule Mittweida, University of Applied Sciences",
     "alpha_two_code": "DE",
     "state-province": null,
-    "domains": ["htwm.de", "hs-mittweida.de", "campus-m-university.de", "campusm21.de"],
+    "domains": [
+      "htwm.de",
+      "hs-mittweida.de",
+      "campus-m-university.de",
+      "campusm21.de"
+    ],
     "country": "Germany"
   },
   {
@@ -46864,7 +46887,12 @@
     "name": "St.Cyril and Methodius University",
     "alpha_two_code": "MK",
     "state-province": null,
-    "domains": ["ukim.edu.mk", "ukim.mk", "finki.ukim.mk", "students.finki.ukim.mk"],
+    "domains": [
+      "ukim.edu.mk",
+      "ukim.mk",
+      "finki.ukim.mk",
+      "students.finki.ukim.mk"
+    ],
     "country": "North Macedonia"
   },
   {
@@ -50396,7 +50424,10 @@
     "country": "Netherlands"
   },
   {
-    "web_pages": ["http://www.tilburguniversity.nl/", "http://www.tilburguniversity.edu/"],
+    "web_pages": [
+      "http://www.tilburguniversity.nl/",
+      "http://www.tilburguniversity.edu/"
+    ],
     "name": "Tilburg University",
     "alpha_two_code": "NL",
     "state-province": null,
@@ -50428,7 +50459,10 @@
     "country": "Netherlands"
   },
   {
-    "web_pages": ["http://www.unimaas.nl/", "https://www.maastrichtuniversity.nl/"],
+    "web_pages": [
+      "http://www.unimaas.nl/",
+      "https://www.maastrichtuniversity.nl/"
+    ],
     "name": "Maastricht University",
     "alpha_two_code": "NL",
     "state-province": null,
@@ -60340,7 +60374,11 @@
     "country": "Serbia"
   },
   {
-    "web_pages": ["http://www.megatrend-edu.net/", "http://megatrend.edu.rs/", "http://xz.edu.rs/"],
+    "web_pages": [
+      "http://www.megatrend-edu.net/",
+      "http://megatrend.edu.rs/",
+      "http://xz.edu.rs/"
+    ],
     "name": "Megatrend University of Applied Sciences",
     "alpha_two_code": "RS",
     "state-province": null,
@@ -65572,7 +65610,10 @@
     "country": "Turkey"
   },
   {
-    "web_pages": ["http://www.sabanciuniv.edu.tr/", "http://www.sabanciuniv.edu/"],
+    "web_pages": [
+      "http://www.sabanciuniv.edu.tr/",
+      "http://www.sabanciuniv.edu/"
+    ],
     "name": "Sabanci University",
     "alpha_two_code": "TR",
     "state-province": null,
@@ -77220,7 +77261,10 @@
     "country": "Germany"
   },
   {
-    "web_pages": ["http://www.dhbw-mosbach.de/", "https://www.mosbach.dhbw.de/"],
+    "web_pages": [
+      "http://www.dhbw-mosbach.de/",
+      "https://www.mosbach.dhbw.de/"
+    ],
     "name": "Duale Hochschule Baden-Württemberg Mosbach",
     "alpha_two_code": "DE",
     "state-province": "null",
@@ -77260,7 +77304,10 @@
     "country": "Germany"
   },
   {
-    "web_pages": ["http://www.dhbw-karlsruhe.de/", "http://www.karlsruhe.dhbw.de/"],
+    "web_pages": [
+      "http://www.dhbw-karlsruhe.de/",
+      "http://www.karlsruhe.dhbw.de/"
+    ],
     "name": "Duale Hochschule Baden-Württemberg Karlsruhe",
     "alpha_two_code": "DE",
     "state-province": "null",
@@ -77268,7 +77315,10 @@
     "country": "Germany"
   },
   {
-    "web_pages": ["http://www.dhbw-mannheim.de/", "http://www.mannheim.dhbw.de/"],
+    "web_pages": [
+      "http://www.dhbw-mannheim.de/",
+      "http://www.mannheim.dhbw.de/"
+    ],
     "name": "Duale Hochschule Baden-Wuerttemberg Mannheim",
     "alpha_two_code": "DE",
     "state-province": "null",
@@ -78088,7 +78138,12 @@
   },
   {
     "name": "University of Liège",
-    "domains": ["student.uliege.be", "helpnet.uliege.be", "ddi.uliege.be", "uliege.be"],
+    "domains": [
+      "student.uliege.be",
+      "helpnet.uliege.be",
+      "ddi.uliege.be",
+      "uliege.be"
+    ],
     "web_pages": ["https://uliege.be"],
     "country": "Belgium",
     "alpha_two_code": "BE",
@@ -78175,7 +78230,10 @@
     "country": "Germany"
   },
   {
-    "web_pages": ["https://website.musikhochschule-muenchen.de/", "https://www.hmtm.de/"],
+    "web_pages": [
+      "https://website.musikhochschule-muenchen.de/",
+      "https://www.hmtm.de/"
+    ],
     "name": "Hochschule für Musik und Theater München",
     "alpha_two_code": "DE",
     "state-province": "Bavaria",
@@ -78375,7 +78433,9 @@
     "country": "United Kingdom"
   },
   {
-    "web_pages": ["https://www.vlerick.com/en/about-vlerick/our-campuses/brussels-campus/"],
+    "web_pages": [
+      "https://www.vlerick.com/en/about-vlerick/our-campuses/brussels-campus/"
+    ],
     "name": "Vlerick Brussels Campus",
     "alpha_two_code": "BE",
     "state-province": null,
@@ -79319,7 +79379,10 @@
     "country": "United States"
   },
   {
-    "web_pages": ["https://panimalar.ac.in", "https://panimalarengineeringcollegechennai.ac.in/"],
+    "web_pages": [
+      "https://panimalar.ac.in",
+      "https://panimalarengineeringcollegechennai.ac.in/"
+    ],
     "name": "Panimalar Engineering College",
     "alpha_two_code": "IN",
     "state-province": "Tamil Nadu",

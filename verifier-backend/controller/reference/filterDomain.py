@@ -9,7 +9,10 @@ def filter_domain():
         if 'domains' in item:
             domain = item['domains']
             string = ''.join(domain)
-            filtered.append(domain)
+            if string.__contains__('student'):
+                continue
+            else:
+                filtered.append(string)
     res_json = json.dumps(filtered, indent=4)
 
     with open('filtered_inst.json', 'w') as file:

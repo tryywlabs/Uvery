@@ -1,6 +1,22 @@
 import mongoose from 'mongoose';
 
-// Define schema for user accounts
+//NOTE: Not Integrated into the Application
+//TODO: Implement logic for MongoDB to store metadata for faster reads
+
+/*
+ * FILE: Model for a Certificate Object
+ * DESCRIPTION: Mongoose schema for representing a certificate
+ * USE: Define a certificate structure for MongoDB metadata upload
+ */
+
+// Elements:
+// Name
+// Issued To
+// Issued By
+// Issue Date
+// Expiration Date
+// Status
+
 const certSchema = new mongoose.Schema({
   certName: {
     type: String,

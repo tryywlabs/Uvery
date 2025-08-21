@@ -2,6 +2,7 @@
 import User from '../model/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { isValidDomain } from './reference/valid.js';
 // import './reference/allowedInst.json' assert { type: 'json' };
 
 /* 
@@ -12,7 +13,7 @@ Controller Functions for User Management:
 4. updateUser: Updates user details based on their ID.
 5. deleteUser: Deletes a user by their ID.
 6. signinUser: Authenticates a user and returns JWT token.
- */
+*/
 
 //1. POST Create New User
 export const createUser = async (req, res) => {
@@ -26,6 +27,13 @@ export const createUser = async (req, res) => {
       return res
         .status(400)
         .json({ errorMessage: 'User for this Institution already exists.' });
+    }
+
+    if (!isValidDomain(email)) {
+      return res.status(400).json({
+        message:
+          'Invalid education domain. Please use a valid institution email address.',
+      });
     }
 
     //Hash password before saving, 10 rounds of salting
