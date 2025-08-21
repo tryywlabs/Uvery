@@ -74,7 +74,7 @@ export const Signup = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/user', {
+      const response = await fetch('/api/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,6 +94,11 @@ export const Signup = () => {
         alert('Signup successful! Please sign in to continue.');
         // Navigate to signin page after successful signup
         navigate('/signin');
+      } else if (
+        data.errorMessage ==
+        'Invalid education domain. Please use a valid institution email address.'
+      ) {
+        alert('Invalid email domain. Please use a valid institution email.');
       } else {
         alert(data.errorMessage || 'Signup failed. Please try again.');
       }

@@ -4,6 +4,7 @@ import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './Components/AuthProvider.jsx';
 import { useEffect } from 'react';
+import { apiCall } from '../utils/connection.js';
 
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
@@ -65,7 +66,7 @@ export const Signin = () => {
 
     try {
       // FIXED: Use correct endpoint /api/users/signin (not /api/user/signin)
-      const response = await fetch('http://localhost:8000/api/user/signin', {
+      const response = await apiCall('/users/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
