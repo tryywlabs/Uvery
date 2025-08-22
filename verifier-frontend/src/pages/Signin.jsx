@@ -6,6 +6,8 @@ import { useAuth } from './Components/AuthProvider.jsx';
 import { useEffect } from 'react';
 import { apiCall } from '../utils/connection.js';
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
 const fadeIn = {

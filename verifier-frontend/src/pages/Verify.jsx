@@ -25,6 +25,8 @@ function CertificateVerifier() {
   const [message, setMessage] = useState('');
   const [certificate, setCertificate] = useState(null);
 
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -39,7 +41,7 @@ function CertificateVerifier() {
 
     try {
       const response = await fetch(
-        'http://localhost:8000/api/certificate/verify-certificate',
+        `${VITE_API_BASE_URL}/api/certificate/verify-certificate`,
         {
           method: 'POST',
           body: formData,
