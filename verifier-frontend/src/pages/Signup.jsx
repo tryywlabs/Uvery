@@ -74,7 +74,7 @@ export const Signup = () => {
     }
 
     try {
-      const response = await fetch('/api/user', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
