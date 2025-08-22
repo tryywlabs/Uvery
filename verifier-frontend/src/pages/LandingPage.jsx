@@ -60,7 +60,7 @@ export const LandingPage = () => {
         {showLogo && (
           <motion.div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50'>
             <motion.img
-              src='src/assets/Uvery.svg'
+              src='/assets/Uvery.svg'
               alt='Uvery Logo'
               className='h-20 sm:h-20 rounded transition'
               initial='initial'
@@ -170,19 +170,19 @@ export const LandingPage = () => {
                   title='Peer-to-peer Verification'
                   description='We offer a decentralised cryptographic verification of issued certificates, with no centralised storate of critical information or the certificates themselves'
                   className='!bg-gray-300 !border-zinc-200 w-full md:w-1/3'
-                  image='src/pages/AboutIcons/magnifying-glass.png'
+                  image='/assets/AboutIcons/magnifying-glass.png'
                 ></CustomCard>
                 <CustomCard
                   title='Streamlined Process for Hirers'
                   description='Instead of having to contact the institution, we allow hirers to verify the authenticity of a candidate’s certificate in seconds'
                   className='!bg-zinc-300 !border-zinc-200 w-full md:w-1/3'
-                  image='src/pages/AboutIcons/clock.png'
+                  image='/assets/AboutIcons/clock.png'
                 ></CustomCard>
                 <CustomCard
                   title='Automate Certificate Issuance'
                   description='Our platform offers much more for universities and academic institutes; start issuing and distributing certificates securely and quickly'
                   className='!bg-slate-300 !border-zinc-200 w-full md:w-1/3'
-                  image='src/pages/AboutIcons/edit-text.png'
+                  image='/assets/AboutIcons/edit-text.png'
                 ></CustomCard>
               </div>
             </section>
