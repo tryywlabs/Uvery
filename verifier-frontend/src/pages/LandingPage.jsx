@@ -170,19 +170,19 @@ export const LandingPage = () => {
                   title='Peer-to-peer Verification'
                   description='We offer a decentralised cryptographic verification of issued certificates, with no centralised storate of critical information or the certificates themselves'
                   className='!bg-gray-300 !border-zinc-200 w-full md:w-1/3'
-                  image='/assets/AboutIcons/magnifying-glass.png'
+                  image='/images/AboutIcons/magnifying-glass.png'
                 ></CustomCard>
                 <CustomCard
                   title='Streamlined Process for Hirers'
                   description='Instead of having to contact the institution, we allow hirers to verify the authenticity of a candidate’s certificate in seconds'
                   className='!bg-zinc-300 !border-zinc-200 w-full md:w-1/3'
-                  image='/assets/AboutIcons/clock.png'
+                  image='/images/AboutIcons/clock.png'
                 ></CustomCard>
                 <CustomCard
                   title='Automate Certificate Issuance'
                   description='Our platform offers much more for universities and academic institutes; start issuing and distributing certificates securely and quickly'
                   className='!bg-slate-300 !border-zinc-200 w-full md:w-1/3'
-                  image='/assets/AboutIcons/edit-text.png'
+                  image='/images/AboutIcons/edit-text.png'
                 ></CustomCard>
               </div>
             </section>
