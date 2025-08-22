@@ -39,7 +39,7 @@ export default function NavBar() {
     <Navbar fluid className='!bg-zinc-100 py-2'>
       <NavbarBrand>
         <img
-          src='src/assets/Uvery.svg'
+          src='/assets/Uvery.svg'
           className='ml-10 mr-4 h-20 sm:h-20 rounded cursor-pointer hover:brightness-90 transition'
           alt='Uvery Logo'
           onClick={() => navigate('/')}
