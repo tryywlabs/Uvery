@@ -15,6 +15,7 @@ const corsOptions = {
     'http://localhost:5174',
     'http://localhost:8000',
     'http://13.40.146.25',
+    'https://uvery.vercel.app/',
   ],
   credentials: true,
   optionsSuccessStatus: 200, // For legacy browser support
