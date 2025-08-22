@@ -14,7 +14,7 @@ const corsOptions = {
     'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:8000',
-    'Add-production-domain',
+    'http://13.40.146.25',
   ],
   credentials: true,
   optionsSuccessStatus: 200, // For legacy browser support
@@ -40,7 +40,7 @@ app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
+      if (corsOptions.includes(origin) === -1) {
         return callback(new Error('CORS Violation'), false);
       }
       return callback(null, true);
