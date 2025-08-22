@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { LandingPage } from './pages/landingpage.jsx';
+import { LandingPage } from './pages/LandingPage.jsx';
 import { Signin } from './pages/Signin.jsx';
 import { Signup } from './pages/Signup.jsx';
 import { User } from './pages/User.jsx';
