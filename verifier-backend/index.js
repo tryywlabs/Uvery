@@ -64,3 +64,4 @@ mongoose
   });
 
 export default app;
+// Updated CORS configuration on Sat Aug 23 14:27:40 BST 2025
