@@ -16,6 +16,7 @@ const corsOptions = {
     'http://localhost:8000',
     'http://13.40.146.25',
     'https://uvery.vercel.app/',
+    'https://uvery-6vvbzzejv-tryywlabs-projects.vercel.app',
   ],
   credentials: true,
   optionsSuccessStatus: 200, // For legacy browser support
@@ -54,7 +55,7 @@ mongoose
   .connect(MONGO_URL)
   .then(() => {
     console.log('MongoDB connected successfully');
-    app.listen(PORT, '0.0.0.0', () => {
+    app.listen(PORT, () => {
       console.log('Server is running on port: ', PORT);
     });
   })
