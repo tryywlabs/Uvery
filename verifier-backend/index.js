@@ -10,14 +10,7 @@ const app = express();
 dotenv.config();
 
 const corsOptions = {
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:8000',
-    'http://13.40.146.25',
-    'https://uvery.vercel.app/',
-    'https://uvery-6vvbzzejv-tryywlabs-projects.vercel.app',
-  ],
+  origin: ['*'],
   credentials: true,
   optionsSuccessStatus: 200, // For legacy browser support
 };
@@ -64,3 +57,4 @@ mongoose
   });
 
 export default app;
+// Updated CORS configuration on Sat Aug 23 14:27:40 BST 2025
