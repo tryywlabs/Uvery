@@ -125,7 +125,7 @@ export const User = () => {
             variants={fadeIn}
             custom={2}
           >
-            Upload your certificate, send to student!
+            Upload your certificate to Register it, then send it to the student!
           </motion.h2>
           <motion.div
             className='mb-4'
