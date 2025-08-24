@@ -10,12 +10,7 @@ const app = express();
 dotenv.config();
 
 const corsOptions = {
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:8000',
-    'Add-production-domain',
-  ],
+  origin: ['*'],
   credentials: true,
   optionsSuccessStatus: 200, // For legacy browser support
 };
@@ -40,7 +35,7 @@ app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
+      if (corsOptions.includes(origin) === -1) {
         return callback(new Error('CORS Violation'), false);
       }
       return callback(null, true);
@@ -60,3 +55,6 @@ mongoose
   .catch((err) => {
     console.error('MongoDB connection error:', err);
   });
+
+export default app;
+// Updated CORS configuration on Sat Aug 23 14:27:40 BST 2025

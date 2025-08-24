@@ -6,6 +6,8 @@ import { useAuth } from './Components/AuthProvider.jsx';
 import { useEffect } from 'react';
 import { apiCall } from '../utils/connection.js';
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
 const fadeIn = {
@@ -65,8 +67,7 @@ export const Signin = () => {
     console.log('Signin Data:', formData);
 
     try {
-      // FIXED: Use correct endpoint /api/users/signin (not /api/user/signin)
-      const response = await apiCall('/users/signin', {
+      const response = await fetch(`${VITE_API_BASE_URL}/users/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -5,6 +5,8 @@ import { CustomButton as Button } from './Components/CustomButton.tsx';
 import { useNavigate } from 'react-router-dom';
 import { CertDetails } from './Components/CertDetails.jsx';
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
   visible: (i = 1) => ({
@@ -25,6 +27,8 @@ function CertificateVerifier() {
   const [message, setMessage] = useState('');
   const [certificate, setCertificate] = useState(null);
 
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -39,7 +43,7 @@ function CertificateVerifier() {
 
     try {
       const response = await fetch(
-        'http://localhost:8000/api/certificate/verify-certificate',
+        `${VITE_API_BASE_URL}/certificate/verify-certificate`,
         {
           method: 'POST',
           body: formData,
