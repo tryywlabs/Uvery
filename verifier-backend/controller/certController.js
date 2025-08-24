@@ -21,6 +21,7 @@ const generateFileHash = (filePath) => {
   });
 };
 
+// Test for Blockchain
 export const testBlockchainConnection = async (req, res) => {
   try {
     const isConnected = await blockchainService.testConnection();
