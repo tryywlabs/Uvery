@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
 const fadeIn = {
@@ -74,7 +76,7 @@ export const Signup = () => {
     }
 
     try {
-      const response = await fetch(`${VITE_API_BASE_URL}/api/user`, {
+      const response = await fetch(`${VITE_API_BASE_URL}/user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
