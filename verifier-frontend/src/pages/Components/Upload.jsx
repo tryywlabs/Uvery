@@ -38,7 +38,7 @@ export function CertificateUpload() {
     try {
       const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
       const response = await fetch(
-        `${API_BASE_URL}/api/certificate/upload-certificate`,
+        `${API_BASE_URL}/certificate/upload-certificate`,
         {
           method: 'POST',
           body: formData,
