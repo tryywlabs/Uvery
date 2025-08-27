@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// CORS configuration - very permissive for now
+// CORS configuration - extremely permissive for now
 app.use(
   cors({
     origin: '*',
@@ -20,10 +20,10 @@ app.use(
   })
 );
 
-// Middleware
+// Middleware configuration
 app.use(express.json());
 
-// Routes
+// Routes for each controller (User and Certificate)
 app.use('/api/users', userRoutes);
 app.use('/api/certificate', certificateRoutes);
 
