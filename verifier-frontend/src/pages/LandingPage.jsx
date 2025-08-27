@@ -179,7 +179,7 @@ export const LandingPage = () => {
                   image='/images/aboutIcons/clock.png'
                 ></CustomCard>
                 <CustomCard
-                  title='Automate Certificate Issuance'
+                  title='Automate your Certificate Issuance'
                   description='Our platform offers much more for universities and academic institutes; start issuing and distributing certificates securely and quickly'
                   className='!bg-slate-300 !border-zinc-200 w-full md:w-1/3'
                   image='/images/aboutIcons/edit-text.png'
