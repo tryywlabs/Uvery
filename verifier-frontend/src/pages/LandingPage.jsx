@@ -200,7 +200,7 @@ export const LandingPage = () => {
                     Blockchain verification uses distributed ledger technology
                     to create tamper-proof records of certificates. This means
                     once a certificate is registered, it cannot be altered,
-                    providing a secure and transparent verification method.
+                    providing a secure & transparent verification method.
                   </p>
                 </div>
 
