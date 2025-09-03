@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
 
   // Check authentication status on app load
   useEffect(() => {
-    // console.log('AuthProvider: Checking localStorage...');
     const token = localStorage.getItem('authToken');
     const userData = localStorage.getItem('userData');
 

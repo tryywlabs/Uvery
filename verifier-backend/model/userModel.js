@@ -1,7 +1,7 @@
+//Self-Written
 import mongoose from 'mongoose';
 
 /**
- *
  * FILE: userModel Schema
  * DESCRIPTION: Mongoose Schema for User Accounts
  * USE: Define user document structure for MongoDB
@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Unique Identifier
   email: {
     type: String,
     required: true,

@@ -11,10 +11,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// CORS configuration - extremely permissive for now
+// CORS configuration
 app.use(
   cors({
-    origin: '*',
+    origin: process.env.ALLOWED_DOMAIN_ORIGINS,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })

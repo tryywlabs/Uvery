@@ -30,7 +30,7 @@ export const createUser = async (req, res) => {
     }
 
     if (!isValidDomain(email)) {
-      return res.status(400).json({
+      return res.status(401).json({
         message:
           'Invalid education domain. Please use a valid institution email address.',
       });
@@ -146,12 +146,13 @@ export const signinUser = async (req, res) => {
 
     const { password: userPassword, ...userData } = user.toObject();
 
+    //JWT Token Creation and Validation
     let token;
 
     // Check if user already has a valid token
     if (user.token) {
       try {
-        // Use jwt directly instead of external controller
+        // Use jwt directly instead of external jwtController
         const decoded = jwt.verify(
           user.token,
           process.env.JWT_SECRET || 'fallback-secret'
@@ -170,7 +171,7 @@ export const signinUser = async (req, res) => {
         {
           userId: user._id,
           email: user.email,
-          institutionName: user.institutionName,
+          institutionName: user.institutionType,
         },
         process.env.JWT_SECRET || 'fallback-secret',
         { expiresIn: '5d' }

@@ -5,7 +5,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx mocha controller/test/userTest.js",
+    "test:unit": "NODE_OPTIONS=--experimental-vm-modules npx mocha tests/unit/**/*.js",
     "start": "node server",
     "dev": "nodemon server"
   },
@@ -29,6 +30,10 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
-    "nodemon": "^3.1.10"
+    "chai": "^6.0.1",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.7.1",
+    "nodemon": "^3.1.10",
+    "sinon": "^21.0.0"
   }
 }

@@ -1,7 +1,5 @@
+//Self-Written
 import mongoose from 'mongoose';
-
-//NOTE: Not Integrated into the Application
-//TODO: Implement logic for MongoDB to store metadata for faster reads
 
 /*
  * FILE: Model for a Certificate Object
