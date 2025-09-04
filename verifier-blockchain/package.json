@@ -1,7 +1,11 @@
 {
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
-    "ethers": "^6.15.0"
+    "chai": "^4.5.0",
+    "chai-http": "^5.1.2",
+    "ethers": "^6.15.0",
+    "mocha": "^11.7.2",
+    "sinon": "^21.0.0"
   },
   "dependencies": {
     "dotenv": "^17.2.1"
