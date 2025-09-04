@@ -5,6 +5,13 @@ import jwt from 'jsonwebtoken';
 import { isValidDomain } from './reference/valid.js';
 // import './reference/allowedInst.json' assert { type: 'json' };
 
+/**
+ * FILE: userController.js
+ * USE: CRUD functions for user account management
+ * NOTE: JWT functionalities are directly implemented here
+ * NOTE: Interacts with the model classes for MongoDB CRUD operations
+ */
+
 /* 
 Controller Functions for User Management:
 1. createUser: Handles user creation, checks for existing users by email.
@@ -84,9 +91,8 @@ export const updateUser = async (req, res) => {
     if (!userExists) {
       return res.status(404).json({ message: 'User not found.' });
     }
+    //NOTE: Partial AI assistance until the end of the function, using Claude Sonnet 3.7
     await User.findByIdAndUpdate(userId, req.body, { new: true });
-    //function will return the updated document, not the original
-    //if you want the original, set { new: false }, which is the default behaviour
     res.status(200).json({ message: 'User updated successfully.' });
   } catch (error) {
     res.status(500).json({ errorMessage: 'Error updating user', error });
@@ -111,7 +117,6 @@ export const deleteUser = async (req, res) => {
 //6. POST Signin for existing User
 export const signinUser = async (req, res) => {
   try {
-    //Debugging logs
     // console.log('Request body received:', req.body);
     // console.log('Request content-type:', req.get('Content-Type'));
 
@@ -134,8 +139,6 @@ export const signinUser = async (req, res) => {
         .status(401)
         .json({ errorMessage: 'Invalid email or password.' });
     }
-
-    // Use async bcrypt.compare instead of sync
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
@@ -164,7 +167,6 @@ export const signinUser = async (req, res) => {
         console.error('Invalid existing token, generating new:', error);
       }
     }
-
     // Generate new token if needed
     if (!token) {
       token = jwt.sign(
@@ -174,16 +176,15 @@ export const signinUser = async (req, res) => {
           institutionName: user.institutionType,
         },
         process.env.JWT_SECRET || 'fallback-secret',
-        { expiresIn: '5d' }
-        //Testing Completed with 120 seconds, changed to 5 days for production
+        { expiresIn: '3d' }
+        //Testing Completed with 120 seconds, changed to 3 days for production
       );
 
-      user.token = token; // Save new token to user
+      user.token = token;
       await user.save();
-      //debug for newly generated token
+      //debug console statement for newly generated token
       // console.log('New token generated:', token);
     }
-
     res.status(200).json({
       message: 'User signed in successfully',
       token,
@@ -200,14 +201,14 @@ export const signinUser = async (req, res) => {
 //7. POST Signout user
 export const signoutUser = async (req, res) => {
   try {
-    const userId = req.user._id; // Assuming user ID is available in req.user
+    const userId = req.user._id;
     const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
-
-    user.token = null; // Clear the token
+    //Clear token when user signs out
+    user.token = null;
     await user.save();
 
     res.status(200).json({ message: 'User signed out successfully.' });

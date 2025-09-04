@@ -60,7 +60,7 @@ contract CertificateVerifier{
     
     
     /*
-     * Modifiers:
+     * Modifiers (appends a behaviour at the end of function)
      * 1. onlyOwner: Used where only contract owner can perform an action
      * 2. onlyAuthorizedInstitution: Institutions must be authorized to perform certificate uploads
      * 3. certificateExists: Used for reads by verifiers

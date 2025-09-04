@@ -1,7 +1,12 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import blockchainService from '../services/blockchainService.js';
-// import { connected } from 'process';
+
+/**
+ * FILE: certController.js
+ * USE: Controller functions for certificate uploads & verification (+ testing and helper functions)
+ * NOTE: Functions here call the blockchainService instance to initiate RPC communication with Sepolia test network
+ */
 
 /*
  * 1. generateFileHash: Takes filepath, outputs filehash of that file through SHA hashing
@@ -9,6 +14,8 @@ import blockchainService from '../services/blockchainService.js';
  * 3. addCertificateToBlockchain: Adds a certificate to the blockchain with file hash
  * 4. verifyCertificate: Verifies a certificate on the blockchain using file hash
  */
+
+//NOTE: All console log statements are commented out
 
 const generateFileHash = (filePath) => {
   return new Promise((resolve, reject) => {
@@ -21,7 +28,7 @@ const generateFileHash = (filePath) => {
   });
 };
 
-// Test for Blockchain
+// Test for Connection with Blockchain network
 export const testBlockchainConnection = async (req, res) => {
   try {
     const isConnected = await blockchainService.testConnection();
@@ -101,7 +108,6 @@ export const verifyCertificate = async (req, res) => {
     }
 
     const fileHash = await generateFileHash(filePath);
-    // Query blockchain for filehash
     const result = await blockchainService.verifyCertificate(fileHash);
 
     if (result && result.exists) {
@@ -119,7 +125,7 @@ export const verifyCertificate = async (req, res) => {
         message: 'Certificate verified successfully',
         exists: true,
         certificate: {
-          certificateId: certificateId?.toString(), //Convert BigInt to string for parsing.
+          certificateId: certificateId?.toString(),
           institution,
           studentEmail,
           certificateType,

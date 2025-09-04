@@ -36,7 +36,7 @@ router.post(
 router.post(
   '/verify-certificate',
   upload.single('certificate'),
-  verifyCertificate // Pass req and res directly; controller will hash the file
+  verifyCertificate
 );
 
 export default router;

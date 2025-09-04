@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import NavBar from './Components/Navbar.tsx';
 import { CustomButton as Button } from './Components/CustomButton.tsx';
-import { useNavigate } from 'react-router-dom';
 import { CertDetails } from './Components/CertDetails.jsx';
-
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },

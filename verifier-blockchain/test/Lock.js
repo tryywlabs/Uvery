@@ -16,9 +16,9 @@ describe('CertificateVerifier', function () {
     contract = await Factory.deploy();
     await contract.waitForDeployment();
 
-    // Setup test data
-    testCertificateHash = 'exampleFileHashForTest';
-    testStudentEmail = 'student@example.edu';
+    // Sample test data
+    testCertificateHash = 'yesterdayallmyproblemsseemedsofaraway';
+    testStudentEmail = 'student@student.gla.ac.uk';
     testCertType = 'PGT';
   });
 
@@ -102,8 +102,6 @@ describe('CertificateVerifier', function () {
           testStudentEmail,
           testCertType
         );
-
-      // Verify certificate counter incremented
       expect(await contract.certificateCounter()).to.equal(1);
     });
 
@@ -177,6 +175,7 @@ describe('CertificateVerifier', function () {
         .connect(outsider)
         .verifyCertificateByHash(testCertificateHash);
 
+      //NOTE: AI assisted component (Claude Sonnet 3.7)
       expect(verificationResult[0]).to.be.true; // exists
       expect(verificationResult[1]).to.equal(1); // certificateId
       expect(verificationResult[2]).to.equal(institution1.address); // institution
@@ -191,9 +190,9 @@ describe('CertificateVerifier', function () {
         'nonExistentHash'
       );
 
-      expect(verificationResult[0]).to.be.false; // exists
-      expect(verificationResult[1]).to.equal(0); // certificateId
-      expect(verificationResult[2]).to.equal(ethers.ZeroAddress); // institution
+      expect(verificationResult[0]).to.be.false;
+      expect(verificationResult[1]).to.equal(0);
+      expect(verificationResult[2]).to.equal(ethers.ZeroAddress);
     });
 
     // Test Case 15: Verify certificate by ID - valid certificate
@@ -280,12 +279,16 @@ describe('CertificateVerifier', function () {
 
       await contract.connect(institution1).revokeCertificate(1);
 
+      /**
+       * NOTE: Test both verification functions
+       */
+
       // Verify by hash
       const verificationResult = await contract.verifyCertificateByHash(
         testCertificateHash
       );
-      expect(verificationResult[0]).to.be.true; // exists
-      expect(verificationResult[6]).to.be.false; // isValid
+      expect(verificationResult[0]).to.be.true;
+      expect(verificationResult[6]).to.be.false;
 
       // Verify by ID
       const cert = await contract.verifyCertificateById(1);
@@ -344,7 +347,7 @@ describe('CertificateVerifier', function () {
       const latestBlock = await ethers.provider.getBlock('latest');
 
       // The timestamp should be close to the block timestamp
-      expect(cert.timestamp).to.be.closeTo(latestBlock.timestamp, 5); // Within 5 seconds
+      expect(cert.timestamp).to.be.closeTo(latestBlock.timestamp, 5);
     });
   });
 });

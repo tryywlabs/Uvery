@@ -94,7 +94,6 @@ export const Signup = () => {
 
       if (response.ok) {
         alert('Signup successful! Please sign in to continue.');
-        // Navigate to signin page after successful signup
         navigate('/signin');
       } else if (
         data.message ==

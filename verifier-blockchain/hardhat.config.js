@@ -1,3 +1,8 @@
+/**
+ * FILE: hardhat.config.js
+ * USE: Configuration file Hardhat testing and deployment framework
+ */
+
 import 'dotenv/config';
 import dotenv from 'dotenv';
 import '@nomicfoundation/hardhat-toolbox';
