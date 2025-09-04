@@ -1,3 +1,5 @@
+//Partial AI Assistance, largely human generated
+
 import { ethers } from 'ethers';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -35,32 +37,36 @@ class BlockchainService {
         this.signer
       );
     } catch (error) {
-      console.error('Error initializing BlockchainService:', error);
+      console.error(
+        'Invalid parameters while initializing BlockchainService:',
+        error
+      );
     }
   }
   // Add certificate to blockchain
   async addCertificate(fileHash, studentEmail, certificateType) {
     try {
-      console.log('Adding certificate to blockchain:', {
-        fileHash,
-        studentEmail,
-        certificateType,
-      });
+      // console.log('Adding certificate to blockchain:', {
+      //   fileHash,
+      //   studentEmail,
+      //   certificateType,
+      // });
 
       const tx = await this.contract.addCertificate(
         fileHash,
         studentEmail,
         certificateType
       );
-      console.log('Transaction sent:', tx.hash);
+      // console.log('Transaction sent:', tx.hash);
 
       const receipt = await tx.wait();
-      console.log('Transaction confirmed:', receipt.transactionHash);
+      // console.log('Transaction confirmed:', receipt.transactionHash);
 
       return {
         success: true,
         transactionHash: receipt.transactionHash,
-        certificateId: receipt.logs[0]?.args?.certificateId?.toString() || null,
+        //!! AI generated component
+        certificateId: receipt.logs[0]?.args?.certificateId?.toString(),
       };
     } catch (error) {
       console.error('Error adding certificate to blockchain:', error);
@@ -101,7 +107,7 @@ class BlockchainService {
         return { exists: false };
       }
     } catch (error) {
-      console.error('Blockchain verification error:', error);
+      console.error('Error on the Blockchain side:', error);
       return { exists: false, error: error.message };
     }
   }
@@ -116,7 +122,9 @@ class BlockchainService {
     }
   }
 
-  // Get wallet address from private key
+  //Test Functions:
+
+  //Get wallet address to check correct and proper wallet connection
   getWalletAddress() {
     return this.signer.address;
   }

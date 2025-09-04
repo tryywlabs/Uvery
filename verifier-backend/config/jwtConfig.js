@@ -1,4 +1,7 @@
-//Used to generate random secret key for JWT signing
+/**
+ * FILE: jwtConfig.js
+ * USE: Configure secret key for JWT signing
+ */
 
 const crypto = require('crypto');
 

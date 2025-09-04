@@ -1,60 +1,64 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import route from './routes/userRoute.js';
-import certificateRoute from './routes/certificateRoute.js';
+/**
+ * DEPRECATED (Refer to server.js when looking for the entry point for the backend component)
+ */
 
-const app = express();
-dotenv.config();
+// import express from 'express';
+// import mongoose from 'mongoose';
+// import bodyParser from 'body-parser';
+// import dotenv from 'dotenv';
+// import cors from 'cors';
+// import route from './routes/userRoute.js';
+// import certificateRoute from './routes/certificateRoute.js';
 
-const corsOptions = {
-  origin: ['*'],
-  credentials: true,
-  optionsSuccessStatus: 200, // For legacy browser support
-};
+// const app = express();
+// dotenv.config();
 
-//middleware setup
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(express.json());
+// const corsOptions = {
+//   origin: ['*'],
+//   credentials: true,
+//   optionsSuccessStatus: 200, // For legacy browser support
+// };
 
-const PORT = process.env.PORT || 8000;
-const MONGO_URL = process.env.MONGO_URL;
+// //middleware setup
+// app.use(cors(corsOptions));
+// app.use(bodyParser.json());
+// app.use(express.json());
 
-//Root Route
-app.get('/', (res) => {
-  res.json({ message: 'Welcome to the API' });
-});
+// const PORT = process.env.PORT || 8000;
+// const MONGO_URL = process.env.MONGO_URL;
 
-//API Routes
-app.use('/api/user', route);
-app.use('/api/certificate', certificateRoute);
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (corsOptions.includes(origin) === -1) {
-        return callback(new Error('CORS Violation'), false);
-      }
-      return callback(null, true);
-    },
-    credentials: true,
-  })
-);
+// //Root Route
+// app.get('/', (res) => {
+//   res.json({ message: 'Welcome to the API' });
+// });
 
-mongoose
-  .connect(MONGO_URL)
-  .then(() => {
-    console.log('MongoDB connected successfully');
-    app.listen(PORT, () => {
-      console.log('Server is running on port: ', PORT);
-    });
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err);
-  });
+// //API Routes
+// app.use('/api/user', route);
+// app.use('/api/certificate', certificateRoute);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (!origin) return callback(null, true);
+//       if (corsOptions.includes(origin) === -1) {
+//         return callback(new Error('CORS Violation'), false);
+//       }
+//       return callback(null, true);
+//     },
+//     credentials: true,
+//   })
+// );
 
-export default app;
-// Updated CORS configuration on Sat Aug 23 14:27:40 BST 2025
+// mongoose
+//   .connect(MONGO_URL)
+//   .then(() => {
+//     console.log('MongoDB connected successfully');
+//     app.listen(PORT, () => {
+//       console.log('Server is running on port: ', PORT);
+//     });
+//   })
+//   .catch((err) => {
+//     console.error('MongoDB connection error:', err);
+//   });
+
+// export default app;
+// // Updated CORS configuration on Sat Aug 23 14:27:40 BST 2025

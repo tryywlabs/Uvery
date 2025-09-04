@@ -4,7 +4,7 @@ import blockchainService from '../services/blockchainService.js';
 // import { connected } from 'process';
 
 /*
- * 1. generateFileHash: Generates a SHA-256 hash of the file at given filePath
+ * 1. generateFileHash: Takes filepath, outputs filehash of that file through SHA hashing
  * 2. testBlockchainConnection: Tests the connection to the blockchain and retrieves wallet address
  * 3. addCertificateToBlockchain: Adds a certificate to the blockchain with file hash
  * 4. verifyCertificate: Verifies a certificate on the blockchain using file hash
@@ -33,7 +33,7 @@ export const testBlockchainConnection = async (req, res) => {
       walletAddress,
     });
   } catch (error) {
-    console.error('Blockchain connection error:', error);
+    //console.error('Blockchain connection error:', error);
     res.status(500).json({
       errorMessage: 'Error testing blockchain connection',
       error: error.message,
@@ -56,7 +56,7 @@ export const addCertificateToBlockchain = async (req, res) => {
 
     // Generate file hash
     const fileHash = await generateFileHash(filePath);
-    console.log('Generated file hash:', fileHash);
+    // console.log('Generated file hash:', fileHash);
 
     // Add to blockchain
     const blockchainResult = await blockchainService.addCertificate(
@@ -79,9 +79,12 @@ export const addCertificateToBlockchain = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error('Error in addCertificateToBlockchain:', error);
+    console.error(
+      'Error in addCertificateToBlockchain smart contract function:',
+      error
+    );
     res.status(500).json({
-      errorMessage: 'Internal server error',
+      errorMessage: 'Server Connection Error',
       error: error.message,
     });
   }
@@ -102,7 +105,7 @@ export const verifyCertificate = async (req, res) => {
     const result = await blockchainService.verifyCertificate(fileHash);
 
     if (result && result.exists) {
-      console.log('Certificate found on blockchain:', result);
+      //console.log('Certificate found on blockchain:', result);
       const {
         certificateId,
         institution,
@@ -125,7 +128,7 @@ export const verifyCertificate = async (req, res) => {
         },
       });
     } else {
-      console.log('Certificate Not Found on blockchain');
+      //console.log('Certificate Not Found on blockchain');
       res.status(404).json({
         errorMessage: 'Certificate Not Found on Blockchain',
         fileHash,
@@ -133,7 +136,7 @@ export const verifyCertificate = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error('Error in verifyCertificateOnBlockchain:', error);
+    //console.error('Error in verifyCertificateOnBlockchain:', error);
     res.status(500).json({
       errorMessage: 'Failed to verify certificate',
       error: error.message,

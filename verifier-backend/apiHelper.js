@@ -1,3 +1,5 @@
+//For Debugging Purposes
+
 const API_BASE_URL = 'http://localhost:8000/api';
 
 // Helper function for authenticated requests

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { CustomForm } from './Components/CustomForm.tsx';
 import { useNavigate } from 'react-router-dom';
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // Fade in animation variants
 // This animation will fade in elements with a slight upward motion
 const fadeIn = {
@@ -74,7 +76,7 @@ export const Signup = () => {
     }
 
     try {
-      const response = await fetch(`${VITE_API_BASE_URL}/api/user`, {
+      const response = await fetch(`${VITE_API_BASE_URL}/users/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +84,7 @@ export const Signup = () => {
         body: JSON.stringify({
           username: formData.username,
           email: formData.email,
-          password: formData.password, // Use password field for password
+          password: formData.password,
           institutionType: formData.institutionType,
         }),
       });
@@ -95,7 +97,7 @@ export const Signup = () => {
         // Navigate to signin page after successful signup
         navigate('/signin');
       } else if (
-        data.errorMessage ==
+        data.message ==
         'Invalid education domain. Please use a valid institution email address.'
       ) {
         alert('Invalid email domain. Please use a valid institution email.');
@@ -129,7 +131,9 @@ export const Signup = () => {
         custom={2}
       >
         Sign up to our service as an <strong>Institution</strong>, and begin
-        your journey to securing integrity for your certificates!
+        your journey to securing integrity for your certificates! Please note,
+        only <strong> valid institutional email addresses </strong> will be
+        permitted for registration.
       </motion.h2>
       <div
         id='signinContent'
