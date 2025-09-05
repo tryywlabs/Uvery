@@ -2,7 +2,6 @@
 
 const API_BASE_URL = 'http://localhost:8000/api';
 
-// Helper function for authenticated requests
 export const authenticatedFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem('authToken');
 
@@ -17,8 +16,8 @@ export const authenticatedFetch = async (endpoint, options = {}) => {
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
+  // CASE: Token Expired or Invalid
   if (response.status === 401) {
-    // Token expired or invalid
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
     window.location.href = '/signin';
@@ -28,7 +27,7 @@ export const authenticatedFetch = async (endpoint, options = {}) => {
   return response;
 };
 
-// API functions
+// User Functionality API endpoints
 export const api = {
   // Authentication
   signin: (credentials) =>
@@ -37,20 +36,13 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
     }),
-
+  // Signup
   signup: (userData) =>
     fetch(`${API_BASE_URL}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
     }),
-
-  // Authenticated requests
+  // Navigating to user dashboard (Protected, assuming authenticated user)
   getProfile: () => authenticatedFetch('/users/profile'),
-  updateProfile: (data) =>
-    authenticatedFetch('/users/profile', {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }),
-  signout: () => authenticatedFetch('/users/signout', { method: 'POST' }),
 };

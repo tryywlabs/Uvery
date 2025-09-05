@@ -1,5 +1,6 @@
 /*
- * User Dashbooard Page
+ * FILE: User.jsx
+ * USE: User Account information and upload Page
  */
 
 import NavBar from './Components/Navbar.tsx';
@@ -56,58 +57,11 @@ export const User = () => {
     }
   }, [loading, isAuthenticated, user, username, navigate]);
 
-  // return (
-  //   <div id='userMain' className='bg-zinc-100 min-h-screen'>
-  //     <NavBar></NavBar>
-  //     <motion.h1
-  //       className='py-15 px-15 text-black font-bold'
-  //       initial='hidden'
-  //       animate='visible'
-  //       variants={fadeIn}
-  //       custom={1}
-  //     >
-  //       Welcome, {user.username || user.institutionName}!
-  //     </motion.h1>
-
-  //     <motion.h2
-  //       className='px-15 text-black'
-  //       initial='hidden'
-  //       animate='visible'
-  //       variants={fadeIn}
-  //       custom={2}
-  //     >
-  //       Upload your certificate, send to student!
-  //     </motion.h2>
-  //     <motion.div
-  //       className='px-15 py-5'
-  //       initial='hidden'
-  //       animate='visible'
-  //       variants={fadeIn}
-  //       custom={3}
-  //     >
-  //       <p className='text-gray-600'>
-  //         Institution: {user.institutionName || user.username}
-  //       </p>
-  //       <p className='text-gray-600'>Email: {user.email}</p>
-  //       <p className='text-gray-600'>Type: {user.institutionType}</p>
-  //     </motion.div>
-  //     <motion.div
-  //       className='px-15 py-5'
-  //       initial='hidden'
-  //       animate='visible'
-  //       variants={fadeIn}
-  //       custom={4}
-  //     >
-  //       <CertificateUpload />
-  //     </motion.div>
-  //   </div>
-  // );
-
   return (
     <div id='userMain' className='bg-zinc-100 min-h-screen'>
       <NavBar />
       <div className='flex flex-col md:flex-row justify-center items-start gap-8 px-8 py-12'>
-        {/* Left: Welcome and user info */}
+        {/* User Information section on LEFT */}
         <div className='flex-1 min-w-[300px]'>
           <motion.h1
             className='text-black font-bold text-2xl mb-4'
@@ -141,7 +95,7 @@ export const User = () => {
             <p className='text-gray-600'>Type: {user.institutionType}</p>
           </motion.div>
         </div>
-        {/* Right: Upload form */}
+        {/* Uploading form component on the RIGHT */}
         <motion.div
           className='flex-1 min-w-[350px]'
           initial='hidden'

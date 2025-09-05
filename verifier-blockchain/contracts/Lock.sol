@@ -1,3 +1,6 @@
+//AI-assisted in debugging and refactoring
+//Claude Sonnet 3.7
+
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 import "hardhat/console.sol";
@@ -17,12 +20,12 @@ contract CertificateVerifier{
     //6. isValid (true / false value depending on verification)
 
     struct Certificate {
-        string fileHash;        
-        address institution;    
-        string studentEmail;   
+        string fileHash;    
+        address institution;
+        string studentEmail;
         string certificateType;
         uint256 timestamp;
-        bool isValid;    
+        bool isValid;
     }
     
     // Mapping from certificate ID to certificate data
@@ -31,9 +34,9 @@ contract CertificateVerifier{
     mapping(string => uint256) public hashToCertificateId;
     // Mapping to track authorized institutions
     mapping(address => bool) public authorizedInstitutions;
-    // Counter for certificate IDs for later read functions
+    // Counter for certificate ID
     uint256 public certificateCounter;
-    // Contract owner (can authorize institutions)
+    //Admin variable
     address public owner;
     
     /*
@@ -57,7 +60,7 @@ contract CertificateVerifier{
     
     
     /*
-     * Modifiers:
+     * Modifiers (appends a behaviour at the end of function)
      * 1. onlyOwner: Used where only contract owner can perform an action
      * 2. onlyAuthorizedInstitution: Institutions must be authorized to perform certificate uploads
      * 3. certificateExists: Used for reads by verifiers
@@ -111,11 +114,11 @@ contract CertificateVerifier{
     }
     
     /**
-     * @dev Add a new certificate to the blockchain
-     * @param _fileHash SHA-256 hash of the certificate file
-     * @param _studentEmail Email of the student receiving the certificate
-     * @param _certificateType Type of certificate (e.g., "Bachelor's Degree")
-     * @return certificateId The ID of the newly created certificate
+     * @dev
+     * @param _fileHash
+     * @param _studentEmail student email of the recipient
+     * @param _certificateType B / M / PHD / Other
+     * @return certificateId 
      */
     function addCertificate(
         string memory _fileHash,
@@ -127,7 +130,7 @@ contract CertificateVerifier{
         require(bytes(_certificateType).length > 0, "Certificate type cannot be empty");
         require(hashToCertificateId[_fileHash] == 0, "Certificate with this hash already exists");
         
-        // Increment counter
+        // Increment counter when certificate is added
         certificateCounter++;
         
         // Create new certificate
@@ -140,10 +143,10 @@ contract CertificateVerifier{
             isValid: true
         });
         
-        // Map hash to certificate ID for quick lookup
+        // Create mapping for the new certificate hash
         hashToCertificateId[_fileHash] = certificateCounter;
         
-        // Emit event
+        // Emit relevant event
         emit CertificateAdded(
             certificateCounter,
             _fileHash,
@@ -151,20 +154,19 @@ contract CertificateVerifier{
             _studentEmail,
             _certificateType
         );
-        
         return certificateCounter;
     }
     
     /**
-     * @dev Verify a certificate by its file hash, actual verification logic is done in the backend
-     * @param _fileHash SHA-256 hash of the certificate file to verify
-     * @return exists Whether the certificate exists
-     * @return certificateId ID of the certificate
-     * @return institution Address of the institution that issued it
-     * @return studentEmail Email of the student
-     * @return certificateType Type of certificate
-     * @return timestamp When it was issued
-     * @return isValid Whether it's still valid
+     * @dev 
+     * @param _fileHash certificate hash
+     * @return exists certificate exists?
+     * @return certificateId 
+     * @return institution 
+     * @return studentEmail 
+     * @return certificateType 
+     * @return timestamp 
+     * @return isValid
      */
     function verifyCertificateByHash(string memory _fileHash)
         external
@@ -200,8 +202,8 @@ contract CertificateVerifier{
     
     /**
      * @dev Verify a certificate by its ID
-     * @param _certificateId ID of the certificate to verify
-     * @return certificate The certificate data
+     * @param _certificateId certificate ID
+     * @return certificate 
      */
     function verifyCertificateById(uint256 _certificateId)
         external
@@ -212,10 +214,7 @@ contract CertificateVerifier{
         return certificates[_certificateId];
     }
     
-    /**
-     * @dev Revoke a certificate (mark as invalid)
-     * @param _certificateId ID of the certificate to revoke
-     */
+    //NOT IN USE CURRENTLY: Revoking is simply switching the state value to isValid = false
     function revokeCertificate(uint256 _certificateId)
         external
         certificateExists(_certificateId)
@@ -232,19 +231,12 @@ contract CertificateVerifier{
         emit CertificateRevoked(_certificateId);
     }
     
-    /**
-     * @dev Get total number of certificates issued
-     * @return Total number of certificates
-     */
+    //Total number of certificates on network
     function getTotalCertificates() external view returns (uint256) {
         return certificateCounter;
     }
     
-    /**
-     * @dev Check if an institution is authorized
-     * @param _institution Address to check
-     * @return Whether the institution is authorized
-     */
+    //NOT IN USE: Later when user metamask wallet is required
     function isInstitutionAuthorized(address _institution) external view returns (bool) {
         return authorizedInstitutions[_institution];
     }

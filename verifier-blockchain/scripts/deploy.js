@@ -1,10 +1,13 @@
-const { ethers } = require('hardhat');
+//AI Assisted
+//Claude Sonnet 3.7
+
+import { ethers } from 'hardhat';
 
 async function main() {
   const Contract = await ethers.getContractFactory('CertificateVerifier');
   const contract = await Contract.deploy();
   await contract.waitForDeployment();
-  console.log('Certificate Verifier deployed to:', await contract.getAddress());
+  // console.log('Certificate Verifier deployed to:', await contract.getAddress());
 }
 
 main().catch((e) => {

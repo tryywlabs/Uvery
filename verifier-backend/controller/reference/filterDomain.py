@@ -1,3 +1,5 @@
+# Filter through each object in allowedInst.json, only leaving the domain name where it doesn't contain 'student'
+
 import json
 
 def filter_domain():

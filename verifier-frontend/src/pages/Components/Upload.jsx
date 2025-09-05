@@ -5,14 +5,14 @@ export function CertificateUpload() {
   const [studentEmail, setStudentEmail] = useState('');
   const [certificateType, setCertificateType] = useState('');
   const [message, setMessage] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
+  const [setIsUploading] = useState(false);
   const [notification, setNotification] = useState({
     show: false,
     type: '',
     message: '',
   });
 
-  //Logging Notification on UI
+  // Notification UI component
   const showNotification = (type, message) => {
     setNotification({ show: true, type, message });
     setTimeout(() => {

@@ -1,5 +1,11 @@
 //Define endpoints, map them to controller functions, and export the router
 
+/**
+ * FILE: userRoute.js
+ * USE: API route definitions for user account functionlities
+ * NOTE: REST endpoints used for user API calls
+ */
+
 import express from 'express';
 import {
   getAllUsers,
@@ -13,11 +19,11 @@ import {
 
 const route = express.Router();
 
-//Public Routes
+// Accessible by all
 route.post('/', createUser);
 route.post('/signin', signinUser);
 
-//Protected Routes (Requires Authentication)
+// Accessibly by authenticated users
 route.get('/', getAllUsers);
 route.get('/:id', getUserById);
 route.put('/:id', updateUser);

@@ -1,33 +1,56 @@
+//AI assisted with Debugging
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+
+/**
+ * FILE: certificate.sol
+ * USE: Contract allows the definition of a Certificate Object, and the essential methods of managing certificate data on chain.
+ * NOTE: Deployed via Hardhat
+ */
+
 contract CertificateVerifier {
-    // Structure to store certificate data
+    // Certificate Object
     struct Certificate {
-        string fileHash;        // SHA-256 hash of the uploaded file
-        address institution;         // Institution that issued the certificate
-        string studentEmail;    // Student's email
-        string certificateType; // Type of certificate (degree, diploma, etc.)
-        uint256 timestamp;      // When the certificate was added
-        bool isValid;          // Whether the certificate is still valid
+        string fileHash;
+        address institution;
+        string studentEmail;
+        string certificateType;
+        uint256 timestamp;
+        bool isValid;
     }
     
-    // Mapping from certificate ID to certificate data
+    /**
+     * Essential Mappings
+     */
+    
+    // Certificate Unique ID -> Certificate Object
     mapping(uint256 => Certificate) public certificates;
     
-    // Mapping from file hash to certificate ID (for quick lookup)
+    // Certificate FileHash -> Certificate Unique ID (For faster reads during verification)
     mapping(string => uint256) public hashToCertificateId;
     
     // Mapping to track authorized institutions
     mapping(address => bool) public authorizedInstitutions;
     
+    /**
+    * Additional variables
+    */
+
     // Counter for certificate IDs
     uint256 public certificateCounter;
     
     // Contract owner (can authorize institutions)
     address public owner;
     
-    // Events
+    /**
+     * Events during blockchain manipulation
+     * 1. Certificate Added
+     * 2. Certificate Revoked
+     * 3. Institution Authorized (Manually Emitted Event)
+     * 4. Institution Revoked (Manually Emitted Event)
+    */
     event CertificateAdded(
         uint256 indexed certificateId,
         string fileHash,
@@ -35,12 +58,17 @@ contract CertificateVerifier {
         string studentEmail,
         string certificateType
     );
-    
+    //These are mainly for debugging purposes
     event CertificateRevoked(uint256 indexed certificateId);
     event InstitutionAuthorized(address indexed institution);
     event InstitutionRevoked(address indexed institution);
     
-    // Modifiers
+    /**
+     * Modifiers
+     * 1. Only Owner (When Checking for Authorized Institutions)
+     * 2. Only Authorized Institution (When Adding Certificates for Functionality Access Control)
+     * 3. Certificate Exists (When Verification)
+     */
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can perform this action");
         _;
@@ -56,6 +84,7 @@ contract CertificateVerifier {
     
     modifier certificateExists(uint256 _certificateId) {
         require(
+            //Quick check to see if there if the Certificate ID is less than the number of listed certificates
             _certificateId > 0 && _certificateId <= certificateCounter,
             "Certificate does not exist"
         );
@@ -186,26 +215,6 @@ contract CertificateVerifier {
         returns (Certificate memory)
     {
         return certificates[_certificateId];
-    }
-    
-    /**
-     * @dev Revoke a certificate (mark as invalid)
-     * @param _certificateId ID of the certificate to revoke
-     */
-    function revokeCertificate(uint256 _certificateId)
-        external
-        certificateExists(_certificateId)
-    {
-        Certificate storage cert = certificates[_certificateId];
-        
-        // Only the issuing institution or owner can revoke
-        require(
-            msg.sender == cert.institution || msg.sender == owner,
-            "Only institution or owner can revoke certificate"
-        );
-        
-        cert.isValid = false;
-        emit CertificateRevoked(_certificateId);
     }
     
     /**
